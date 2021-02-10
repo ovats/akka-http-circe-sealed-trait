@@ -15,7 +15,7 @@ object SomeApp extends App with FailFastCirceSupport {
 
   val routes = pathPrefix("test") {
     post {
-      entity(as[List[Message]]) { data =>
+      entity(as[Seq[Message]]) { data =>
         println(s"POST /test, body $data")
         complete(StatusCodes.OK)
       }

@@ -24,8 +24,8 @@ object TestMessage extends App {
       | ]
       |""".stripMargin
 
-  val resultEmail = decode[List[Message]](payloadEmail)
+  val resultEmail = decode[Seq[Message]](payloadEmail)
   println(s"resultEmail $resultEmail")
-  val resultSMS = decode[List[Message]](payloadSMS)
+  val resultSMS = decode[Seq[Message]](payloadSMS)
   println(s"resultSMS $resultSMS")
 }

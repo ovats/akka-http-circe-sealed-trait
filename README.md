@@ -13,7 +13,7 @@ case class Email(emailFrom: String, message: String) extends Message
 How can an endpoint accept in the payload a list of Messages and deserialized with the correct case class?
 
 ```scala
-entity(as[List[Message]]) { data =>
+entity(as[Seq[Message]]) { data =>
   println(s"POST /test, body $data")
   complete(StatusCodes.OK)
 }
@@ -22,7 +22,7 @@ entity(as[List[Message]]) { data =>
 Solution:
 
 ```scala
-implicit val messageDecoder: Decoder[Message] = List[Decoder[Message]](Decoder[SMS].widen, Decoder[Email].widen).reduceLeft(_ or _)
+implicit val messageDecoder: Decoder[Message] = Seq[Decoder[Message]](Decoder[SMS].widen, Decoder[Email].widen).reduceLeft(_ or _)
 ```
 
 Curl command for test:
