@@ -21,7 +21,7 @@ object SomeApp extends App with FailFastCirceSupport {
       }
     } ~
       get {
-        complete("up and working!")
+        complete("alive and kicking!")
       }
   }
 
