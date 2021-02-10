@@ -24,3 +24,28 @@ Solution:
 ```scala
 implicit val messageDecoder: Decoder[Message] = List[Decoder[Message]](Decoder[SMS].widen, Decoder[Email].widen).reduceLeft(_ or _)
 ```
+
+Curl command for test:
+
+```
+curl -X POST \
+  http://localhost:8081/test \
+  -H 'Content-Type: application/json' \
+  -d '[
+    {
+        "numFrom": "1-555-1234",
+        "message": "this is a SMS"
+    },
+    {
+    	"emailFrom" : "some@mail.com",
+    	"message" : "email message body"
+    }
+]'
+```
+
+Output:
+
+```
+app started
+POST /test, body List(SMS(1-555-1234,this is a SMS), Email(some@mail.com,email message body))
+```
