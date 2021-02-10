@@ -12,6 +12,6 @@ object Message {
   case class Email(emailFrom: String, message: String) extends Message
 
   implicit val messageDecoder: Decoder[Message] =
-    List[Decoder[Message]](Decoder[SMS].widen, Decoder[Email].widen).reduceLeft(_ or _)
+    Seq[Decoder[Message]](Decoder[SMS].widen, Decoder[Email].widen).reduceLeft(_ or _)
 
 }
